@@ -1,0 +1,26 @@
+<% let flashMessages = req.flash(); %>
+
+<!-- For error messages flashed by Passport.js -->
+<% if (flashMessages.hasOwnProperty('error')) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= flashMessages.error[0] %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+<!-- For messages flashed by me -->
+<% console.log(flashMessages) %> 
+<% } else { %>
+  <% for (let prop in flashMessages) { %>
+    <div class="alert alert-<%= prop%> alert-dismissible fade show" role="alert">
+      <%= flashMessages[prop] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% } %>
+<% } %>
+
+
+<!-- For messages flashed by me -->

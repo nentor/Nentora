@@ -1,0 +1,19 @@
+span#autocomplete {
+  font-weight: bold;
+}
+
+span.mention {
+  display: inline-block;
+  /* background-color: #e48a0d; */
+  text-decoration: none !important;
+  background-color: #3bb4d8 !important;
+  cursor: pointer;
+  padding: 2px;
+  padding-right: 4px;
+  border-radius: 1px;
+}
+
+span.mention > :first-child {
+  margin-left: 4px;
+  font-size: 16px;
+}

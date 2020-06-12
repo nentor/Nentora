@@ -1,0 +1,57 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark d-flex justify-content-between px-4 position-relative">
+    <a href="/index"
+       class="navbar-brand d-none d-md-block">
+      <!-- <img src="/images/logo/logo.jpg"
+           alt="Image"
+           width="35"
+           height="35"
+           class="mr-0"> -->
+      <span>Nentora</span>
+    </a>
+    <button class="navbar-toggler"
+            data-toggle="collapse"
+            data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse"
+         id="navbarNav">
+      <ul class="navbar-nav ml-2">
+        <li class="nav-item d-sm-block d-lg-none">
+          <a class="nav-link"
+             href="/index">
+            <i class="fas fa-shield-alt"></i>
+            Home
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="/forums">
+            <i class="fas fa-comment"></i>
+            Forums
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fas fa-feather-alt"></i>
+            Answer
+          </a>
+        </li> -->
+        <li class="nav-item d-sm-block d-lg-none">
+          <a class="nav-link"
+             href="#">
+            <i class="fas fa-bell text-white"></i>
+            Notifications
+          </a>
+        </li>
+        <li class="nav-item d-sm-block d-lg-none">
+          <a class="nav-link"
+             href="#">
+            <i class="fas fa-envelope"></i>
+            Messages
+          </a>
+        </li>
+      </ul>
+    </div>
+    <%- include('./_user-panel.ejs') %>
+  </nav>
+</header>

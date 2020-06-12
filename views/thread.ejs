@@ -1,0 +1,201 @@
+<main>
+  <div class="container mt-5">
+    <%- include('./partials/_messages.ejs')  %>
+    <%- include('./partials/_pages.ejs') %>
+
+    <% if (!(req.session.page > 1)) { %>
+    <div id="thr-<%= thread.id %>"
+         class="card mb-3">
+      <div class="card-header">
+        <h2 class="h4 m-0 p-0"><%=thread.title%></h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-2 d-flex flex-column align-items-center">
+            <a class="username h4 text-body mb-md-3"
+               href="/profile/<%= thread.user.username %>">
+              <%= thread.user.username %>
+            </a>
+            <a href="/profile/<%= thread.user.username %>">
+              <img src="/images/avatars/<%= thread.user.avatar %>"
+                   width="90"
+                   height="90"
+                   class="avatar rounded-circle">
+            </a>
+            <p class="text-body mt-2">
+              <span class="small text-center d-block"><%= thread.user.selfDescription %></span>
+            </p>
+          </div>
+          <div class="thread-content-wrapper col-md-9 col-lg-10 mt-md-4 position-relative"
+               data-thread="<%= thread.id %>">
+            <div class="card-text"><%- thread.body %></div>
+            <div class="thread-bottom-buttons position-absolute">
+              <% if (typeof req.user != 'undefined' && req.isAuthenticated() && thread.user.username !== req.user.username) { %>
+              <button type="button"
+                      data-username="<%= thread.user.username %>"
+                      class="p-0 thread-mention-button text-white btn font-weight-bold">
+                <i class="fas fa-comment"></i>
+                Mention
+              </button>
+              <% } %>
+              <% if (typeof req.user != 'undefined' && thread.user.id === req.user.id) { %>
+              <button type="button"
+                      data-toggle="modal"
+                      data-target="#editThreadModal"
+                      class="p-0 thread-edit-button text-body ml-3 btn font-weight-bold">
+                <i class="fas fa-edit"></i>
+                Edit
+              </button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <% answers.forEach(answer => { %>
+    <div id="ans-<%= answer.id %>"
+         data-ans="<%= answer.id %>"
+         class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-2 d-flex flex-column align-items-center">
+            <a class="username h4 text-body mb-md-3"
+               href="/profile/<%= answer.user.username %>">
+              <%= answer.user.username %>
+            </a>
+            <a href="/profile/<%= answer.user.username %>">
+              <img src="/images/avatars/<%=answer.user.avatar%>"
+                   width="90"
+                   height="90"
+                   class="avatar rounded-circle">
+            </a>
+            <p class="text-body mt-2">
+              <span class="small text-center d-block"><%= answer.user.selfDescription %></span>
+            </p>
+          </div>
+          <div class="col-md-9 col-lg-10 mt-md-4">
+            <div class="card-text mt-3"><%- answer.body%></div>
+            <div class="thread-bottom-buttons position-absolute">
+              <% if (typeof req.user != 'undefined' && req.isAuthenticated() && answer.user.username !== req.user.username) { %>
+              <button type="button"
+                      data-username="<%= answer.user.username %>"
+                      class="p-0 thread-mention-button text-white btn font-weight-bold">
+                <i class="fas fa-comment"></i>
+                Mention
+              </button>
+              <% } %>
+              <% if (typeof req.user != 'undefined' && answer.user.id === req.user.id) { %>
+              <button type="button"
+                      data-toggle="modal"
+                      data-target="#editAnswerModal"
+                      class="p-0 thread-edit-button text-body ml-3 btn font-weight-bold">
+                <a class="text-body">
+                  <i class="fas fa-edit"></i>
+                  Edit
+                </a>
+              </button>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+    <% if (req.isAuthenticated()) { %>
+    <form class="mt-3"
+          action="/thread/<%=thread.id%>/post-answer"
+          method="POST">
+      <div class="form-group">
+        <textarea class="tinymce form-control bg-dark text-white"
+                  id="answerBody"
+                  name="answerBody"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit"
+                class="btn btn-primary">Reply</button>
+      </div>
+    </form>
+    <% } else { %>
+    <p class="text-muted p-1">You cannot answer threads if you are not logged in</p>
+    <% } %>
+  </div>
+</main>
+
+<!-- Edit Thread Modal -->
+<div class="modal fade"
+     id="editThreadModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Mode</h5>
+        <button type="button"
+                class="close"
+                data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <form method="POST"
+            action="/thread/<%= thread.id %>/edit-thread">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text"
+                   class="form-control"
+                   id="title"
+                   name="title"
+                   value="<%= thread.title %>">
+          </div>
+          <div class="form-group">
+            <label for="body">Body</label>
+            <textarea class="tinymce"
+                      id="body"
+                      name="body"><%= thread.body %></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">Close</button>
+          <button type="submit"
+                  class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Answer Modal -->
+<div class="modal fade"
+     id="editAnswerModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Mode</h5>
+        <button type="button"
+                class="close"
+                data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <form method="POST"
+            action="/thread/<%= thread.id %>/edit-answer">
+        <div class="modal-body">
+          <div class="form-group">
+            <textarea class="tinymce"
+                      id="editAnswerBody"
+                      name="body"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">Close</button>
+          <button type="submit"
+                  class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

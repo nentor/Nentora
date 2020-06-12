@@ -1,0 +1,47 @@
+<%- include('./_profile.ejs') %>
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <% messages.forEach(message => { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title h4">
+            <a class="text-info"
+               href="/profile/<%= req.user.username %>/message/<%= message.id %>">
+              <%= message.title %>
+            </a>
+          </h2>
+          <div class="mb-2 d-flex">
+            <img src="/images/avatars/<%= message.sender.avatar %>"
+                 alt="Avatar"
+                 width="35"
+                 height="35"
+                 class="avatar rounded-circle" />
+            <div class="d-flex flex-column ml-2">
+              <p class="card-title d-inline-block mb-0">
+                <a class="text-body"
+                   href="/profile/<%= message.sender.username %>"><%= message.sender.username %></a>
+              </p>
+              <small class="card-subtitle text-muted d-block">
+                <%= message.createdAt %>
+              </small>
+            </div>
+          </div>
+          <div class="card-text text-truncate mb-3">
+            <%= sanitizeHtml(message.body, {
+              allowedTags: [],
+              disallowedTagsMode: 'discard'
+            }) %>
+          </div>
+          <% if (typeof req.user != 'undefined' && message.recipient.username != req.user.username) { %>
+          <div class="recipient">
+            <i class="fas fa-caret-square-right"></i>
+            <span class="to">to</span>
+            <span class="name font-weight-bold"><%= message.recipient.username %></span>
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <%- include('../_pages.ejs') %>

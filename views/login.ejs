@@ -1,0 +1,31 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <div class="text-center mb-3">
+        <h1 class="form-logo text-white font-weight-bold font-italic mb-1">Nentora</h1>
+      </div>
+      <form action="/login"
+            method="POST">
+        <%- include('partials/_messages.ejs') %>
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 id="username"
+                 name="username"
+                 placeholder="Username" />
+        </div>
+        <div class="form-group">
+          <input type="password"
+                 class="form-control"
+                 id="password"
+                 name="password"
+                 placeholder="Password" />
+        </div>
+        <button class="btn btn-primary w-25"
+                type="submit">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<main>
+  <div class="container mt-5 container-main">
+    <%- include('./partials/_messages.ejs') %>
+    <div class="form-group mb-3 d-flex justify-content-between">
+      <select class="categories-select-home categories-select select-form-control form-control w-25">
+        <option selected
+                value="All">All</option>
+      </select>
+      <select class="order-select select-form-control form-control w-25">
+        <option default="true">Descending</option>
+        <option>Ascending</option>
+      </select>
+    </div>
+    <% for (let thread of threads) { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title h4">
+          <a class="text-body"
+             href="/thread/<%= thread.id %>"><%= thread.title %></a>
+        </h2>
+        <div class="mb-2 d-flex">
+          <a href="/profile/<%= thread.user.username %>">
+            <img src="/images/avatars/<%= thread.user.avatar %>"
+                 alt="Avatar"
+                 width="35"
+                 height="35"
+                 class="avatar rounded-circle" />
+          </a>
+
+          <div class="d-flex flex-column ml-2">
+            <p class="card-title d-inline-block mb-0">
+              <a class="text-body"
+                 href="/profile/<%= thread.user.username %>"><%= thread.user.username %></a>
+            </p>
+            <small class="card-subtitle text-muted d-block">
+              <%= thread.createdAt %>
+            </small>
+          </div>
+        </div>
+        <p class="card-text text-truncate">
+          <%= sanitizeHtml(thread.body, {
+            allowedTags: [],
+            disallowedTagsMode: 'discard'
+          }) %>
+        </p>
+        <div class="d-flex justify-content-between">
+          <a href="/thread/<%= thread.id %>"
+             class="btn btn-primary btn-sm">Read More</a>
+          <span class="badge badge-primary align-self-end"
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="<%= thread.category.description %>"><%= thread.category.name %></span>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <%- include('./partials/_pages.ejs') %>
+  </div>
+</main>

@@ -1,0 +1,47 @@
+<%- include('./_profile.ejs') %>
+<div class="card">
+  <div class="card-body">
+    <div class="container">
+      <% for (let thread of threads) { %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="card-title h4">
+            <a class="text-body"
+               href="/thread/<%= thread.id %>">
+              <%= thread.title %>
+            </a>
+          </h2>
+          <div class="mb-2 d-flex">
+            <img src="/images/avatars/<%= thread.user.avatar %>"
+                 alt="Avatar"
+                 width="35"
+                 height="35"
+                 class="avatar rounded-circle" />
+            <div class="d-flex flex-column ml-2">
+              <p class="card-title d-inline-block mb-0">
+                <a class="text-body"
+                   href="/profile/<%= thread.user.username %>">
+                  <%= thread.user.username %>
+                </a>
+              </p>
+              <small class="card-subtitle text-muted d-block">
+                <%= thread.createdAt %>
+              </small>
+            </div>
+          </div>
+          <div class="card-text text-truncate mb-3">
+            <%- sanitizeHtml(thread.body, {
+              allowedTags: ['iframe'],
+              allowedAttributes: false
+            })%>
+          </div>
+          <a href="/thread/<%= thread.id %>"
+             class="btn btn-primary btn-sm">Read More</a>
+        </div>
+      </div>
+      <% } %>
+      <%- include('../_pages.ejs') %>
+    </div>
+  </div>
+
+</div>

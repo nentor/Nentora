@@ -1,0 +1,129 @@
+<div class="card">
+  <%- include('./_profile-header.ejs') %>
+  <div class="card-body">
+    <div class="d-flex flex-column align-items-center flex-md-row align-items-md-start justify-content-lg-start">
+      <div class="<%= req.session.profileUser.id === req.user.id ? 'user-avatar' : '' %>">
+        <img src="/images/avatars/<%= req.session.profileUser.avatar %>"
+             alt="Avatar"
+             height="115"
+             width="115"
+             class="user-avatar-img avatar rounded-circle" />
+        <% if (req.session.profileUser.id === req.user.id) { %>
+        <form action="/profile/upload-avatar"
+              method="POST"
+              enctype="multipart/form-data">
+          <input class="user-avatar-upload d-none"
+                 type="file"
+                 name="avatar" />
+        </form>
+        <% } %>
+      </div>
+      <div class="user-info ml-4 my-2 d-flex flex-column align-items-center align-items-md-start">
+        <span class="user-name h2"><%= req.session.profileUser.username %></span>
+        <% if (typeof req.user != 'undefined' && req.session.profileUser.username === req.user.username) { %>
+        <button class="btn btn-link p-0 description-btn text-left border-0 text-white"
+                data-toggle="modal"
+                data-target="#selfDescriptionModal">
+
+          <% if (req.session.profileUser.selfDescription) { %>
+          <%= req.session.profileUser.selfDescription %>
+          <% } else { %>
+          Write a short description
+          <% } %>
+        </button>
+        <% } else { %>
+        <span><%= req.session.profileUser.selfDescription %></span>
+        <% } %>
+
+        <div class="modal fade"
+             id="selfDescriptionModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Self Description</h5>
+                <button class="close"
+                        data-dismiss="modal">&times;</button>
+              </div>
+              <form method="POST"
+                    action="/profile/add-description">
+                <div class="modal-body">
+                  <textarea placeholder="Write your self-description here"
+                            name="description"
+                            class="w-100"><%= req.session.profileUser.selfDescription %></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary"
+                          data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary"
+                          type="submit">Submit</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <span class="h5 mt-3 d-flex align-items-center"><span
+                class="badge badge-info mr-1"><%= req.session.profileUser.follower_count %></span>
+          followers</span>
+        <% if (typeof req.user != 'undefined' && req.user.id !== req.session.profileUser.id) { %>
+        <div class="mt-3">
+          <% if (!isFollowing) { %>
+          <a href="/follow/<%= req.session.profileUser.username %>"
+             class="badge badge-info px-2 py-2 mr-1"><i class="fas fa-star mr-1"></i>Follow</a>
+          <% } else { %>
+          <a href="/unfollow/<%= req.session.profileUser.username %>"
+             class="badge badge-info px-2 py-2 mr-1"><i class="fas fa-window-close mr-1"></i>Unfollow</a>
+          <% } %>
+          <button data-toggle="modal"
+                  data-target="#messageModal"
+                  class="border-0 badge badge-info px-2 py-2 mr-1"><i class="fas fa-comment mr-1"></i>Message</button>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade"
+     id="messageModal">
+  <div class="modal-dialog modal-lg"
+       role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Write a message</h5>
+        <button type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/post-message"
+            method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text"
+                   name="title"
+                   class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Body: </label>
+            <textarea class="tinymce"
+                      name="body"
+                      cols="30"
+                      rows="10"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal">Close</button>
+          <button type="submit"
+                  class="btn btn-info">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

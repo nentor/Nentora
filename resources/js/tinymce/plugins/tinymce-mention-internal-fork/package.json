@@ -1,0 +1,64 @@
+{
+  "_from": "tinymce-mention-internal-fork",
+  "_id": "tinymce-mention-internal-fork@0.0.2",
+  "_inBundle": false,
+  "_integrity": "sha512-oJ/Cypig3aIQ5VN/7rVh6sTvgx6cKFtO92lQvKeLmQd7LdfOTwhoI5AVQAjP8k6Igk64LCKxsWpGhuB4hfj3cQ==",
+  "_location": "/tinymce-mention-internal-fork",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "tinymce-mention-internal-fork",
+    "name": "tinymce-mention-internal-fork",
+    "escapedName": "tinymce-mention-internal-fork",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/tinymce-mention-internal-fork/-/tinymce-mention-internal-fork-0.0.2.tgz",
+  "_shasum": "cb959d1146ac7eaf14d7f32c041212cc018c20e0",
+  "_spec": "tinymce-mention-internal-fork",
+  "_where": "/home/nentor/Desktop/nentora-latest",
+  "author": {
+    "name": "Steven Devooght, Forked by Shiv Archit"
+  },
+  "bugs": {
+    "url": "https://github.com/shivarchit/tinyMCE-mention"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "jquery": ">=1.8.3"
+  },
+  "deprecated": false,
+  "description": "Mention/Autocomplete plugin for tinyMCE WYSIWYG editor, modified for internal use with some fixes and modifications",
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-bower": "~0.0.13",
+    "gulp-jshint": "~2.0.0",
+    "gulp-qunit": "~1.3.1",
+    "jshint": "~2.9.1"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "engines": {
+    "node": ">=0.10.26"
+  },
+  "homepage": "https://github.com/shivarchit/tinyMCE-mention",
+  "license": "ISC",
+  "main": "mention/plugin.js",
+  "name": "tinymce-mention-internal-fork",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivarchit/tinyMCE-mention.git"
+  },
+  "scripts": {
+    "test": "gulp lint test"
+  },
+  "version": "0.0.2"
+}

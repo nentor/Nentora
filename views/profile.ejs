@@ -1,0 +1,16 @@
+<main>
+  <div class="container mt-3">
+    <%- include('./partials/_messages') %>
+    <% if (active === 'profile') { %>
+    <%- include('partials/profile/_profile.ejs') %>
+    <% } else if (active === 'threads') { %>
+    <%- include('partials/profile/_threads.ejs') %>
+    <% } else if (active === 'messages') { %>
+    <%- include('partials/profile/_messages.ejs') %>
+    <% } else if (active === 'answers') { %>
+    <%- include('partials/profile/_answers.ejs') %>
+    <% } else if (active === 'message') { %>
+    <%- include('partials/profile/_message.ejs') %>
+    <% } %>
+  </div>
+</main>

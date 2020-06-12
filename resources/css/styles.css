@@ -1,0 +1,218 @@
+/* body {
+	font-family: 'Ubuntu', sans-serif;
+} */
+iframe {
+  border: 2px solid #2b3e50;
+  border-radius: 1px;
+  display: block;
+  margin-top: 3px;
+}
+
+.dropdown {
+  z-index: 10;
+}
+
+.user-panel {
+  position: absolute;
+
+  /* 100% - 140px puts it on the very end of the navbar */
+  /* +15px to get some distance from the end */
+  left: calc(100% - 155px);
+  top: 4px;
+}
+
+.container-main {
+  width: 50%;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.user-info {
+}
+
+.user-avatar {
+  position: relative;
+  border-radius: 50%;
+}
+
+.user-avatar::before {
+  display: inline-block;
+  content: "Change avatar";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  visibility: hidden;
+}
+
+.user-avatar .avatar,
+.user-avatar::before {
+  transition: opacity 0.07s ease-in;
+}
+
+.user-avatar .avatar:hover {
+  opacity: 0.1;
+}
+
+.user-avatar:hover::before {
+  visibility: visible;
+}
+
+.description-btn-group {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.user-menu {
+  z-index: 1000;
+}
+
+.form-logo {
+  font-size: 5rem;
+  font-family: "Playfair Display", serif;
+  font-family: "Cabin", sans-serif;
+}
+
+.forum-table-head {
+  font-size: 0.8rem;
+}
+
+.forum-table-body {
+  font-size: 1rem;
+}
+
+.forum-category-link {
+  text-decoration: none !important;
+}
+
+.forum-category-link:hover {
+  color: #31b0d5 !important;
+}
+
+.forum-header {
+  font-size: 1.6rem;
+}
+
+.thread-title {
+  font-size: 1rem;
+}
+
+.thread-info {
+  font-size: 0.8rem;
+}
+
+.recipient {
+  cursor: pointer;
+  display: inline-block;
+}
+
+a:focus {
+  outline: 0 !important;
+}
+
+/* .toasts {
+  position: absolute;
+  right: 2%;
+  top: 12%;
+  z-index: 100;
+} */
+
+.toast {
+  width: 100%;
+}
+
+.more-notifications-icon {
+  transform: scale(1.5);
+  animation: notificationsArrowAnim 1s ease-in 0s infinite alternate;
+}
+
+.notification-badge {
+  animation-name: badgeAnimation;
+  animation-duration: 0.7s;
+  animation-timing-function: ease-out;
+  position: absolute;
+}
+
+.modal-open {
+  overflow: auto;
+}
+
+.modal.in .modal-dialog {
+  transform: none;
+
+  transform: translate(0, 0);
+}
+
+.thread-bottom-buttons {
+  bottom: -10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes badgeAnimation {
+  from {
+    transform: translateY(3px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationsArrowAnim {
+  from {
+    transform: scale(1.5);
+  }
+  to {
+    transform: scale(2.2);
+  }
+}
+
+@media (min-width: 992px) {
+  .user-panel {
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  /* .toast {
+    max-width: 215px;
+  } */
+}
+
+@media (max-width: 992px) {
+  .select-form-control {
+    width: 38% !important;
+  }
+
+  .container-main {
+    width: 100%;
+  }
+
+  iframe {
+    max-height: 275px;
+    max-width: 100%;
+  }
+
+  .dropdown-menu {
+    /* Fixes an unexpected behavior (most probably a bootstrap thing) where the buttons for post thread and logout get hidden on mobile devices */
+    position: absolute !important;
+    right: 200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container-main {
+    width: 70%;
+  }
+}
